@@ -1,4 +1,7 @@
 class MenuInteractivo:
+    def __init__(self):
+        self.productos = []  
+
     def menu(self):
         while True:
             print("----------------------------------------------------------------------------------------------")
@@ -17,9 +20,21 @@ class MenuInteractivo:
                 continue
 
             if opcion == 1:
-                print("Opción 1 seleccionada.")
+                nombre = input("Ingrese el nombre del producto: ")
+                try:
+                    precio = float(input("Precio del producto: $"))
+                    self.productos.append((nombre, precio))
+                    print(f"Producto {nombre} agregado! ${precio}")
+                except ValueError:
+                    print("El precio debe ser en número.")
+
             elif opcion == 2:
-                print("Opción 2 seleccionada.")
+                if not self.productos:
+                    print("No hay productos registrados.")
+                else:
+                    print("Productos registrados: ")
+                    for nombre, precio in self.productos:
+                        print(f"- {nombre}: ${precio}")
             elif opcion == 3:
                 print("Opción 3 seleccionada.")
             elif opcion == 4:
@@ -29,6 +44,7 @@ class MenuInteractivo:
                 break
             else:
                 print("Opción no válida. Intente de nuevo.")
+
 
 p = MenuInteractivo()
 p.menu()
