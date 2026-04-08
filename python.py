@@ -1,6 +1,8 @@
 class MenuInteractivo:
     def __init__(self):
+
         self.productos = []
+        
     def menu(self):
         while True:
             print("----------------------------------------------------------------------------------------------")
