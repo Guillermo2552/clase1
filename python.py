@@ -1,8 +1,7 @@
 class MenuInteractivo:
     def __init__(self):
+        self.productos = []  
 
-        self.productos = []
-        
     def menu(self):
         while True:
             print("----------------------------------------------------------------------------------------------")
@@ -21,18 +20,54 @@ class MenuInteractivo:
                 continue
 
             if opcion == 1:
-                print("Opción 1 seleccionada.")
+                nombre = input("Ingrese el nombre del producto: ")
+                try:
+                    precio = float(input("Precio del producto: $"))
+                    self.productos.append((nombre, precio))
+                    print(f"Producto {nombre} agregado! ${precio}")
+                except ValueError:
+                    print("El precio debe ser en número.")
+
             elif opcion == 2:
-                print("Opción 2 seleccionada.")
+                if not self.productos:
+                    print("No hay productos registrados.")
+                else:
+                    print("Productos registrados: ")
+                    for nombre, precio in self.productos:
+                        print(f"- {nombre}: ${precio}")
+
             elif opcion == 3:
-                print("Opción 3 seleccionada.")
+                # Se utiliza un condicional para validar si hay elementos 
+                if not self.productos:
+                    print("La lista está vacía. No hay total que calcular.")
+                else:
+                    total_compra = 0
+                    # Se implementa un ciclo para recorrer la lista y sumar los precios 
+                    for _, precio in self.productos:
+                        total_compra += precio
+                    print(f"El total acumulado de la compra es: ${total_compra}")
+
             elif opcion == 4:
-                print("Opción 4 seleccionada.")
+                # Funcionalidad opcional de filtros [cite: 23, 55]
+                if not self.productos:
+                    print("No hay productos para filtrar.")
+                else:
+                    try:
+                        limite = float(input("Mostrar productos con precio mayor a: $"))
+                        print(f"Productos mayores a ${limite}:")
+                        for nombre, precio in self.productos:
+                            if precio > limite:
+                                print(f"- {nombre}: ${precio}")
+                    except ValueError:
+                        print("Por favor, ingrese un valor numérico.")
+
             elif opcion == 5:
-                print("Saliendo...")
+                print("Saliendo del sistema...")
                 break
             else:
                 print("Opción no válida. Intente de nuevo.")
 
-p = MenuInteractivo()
-p.menu()
+# Ejecución del programa [cite: 95]
+if __name__ == "__main__":
+    p = MenuInteractivo()
+    p.menu()
